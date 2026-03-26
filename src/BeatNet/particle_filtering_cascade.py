@@ -107,7 +107,7 @@ class particle_filter_cascade:
     MIN_BEAT_PER_BAR = 2
     MAX_BEAT_PER_BAR = 4
     OFFSET = 0 # The point of time after which the inference model starts to work. Can be zero!
-    IG_THRESHOLD = 0.4  # Information Gate threshold
+    IG_THRESHOLD = 0.15  # Information Gate threshold (lowered from 0.4 for noisy audio)
 
     def __init__(self, beats_per_bar=[], particle_size=PARTICLE_SIZE, down_particle_size=DOWN_PARTICLE_SIZE,
                  min_bpm=MIN_BPM, max_bpm=MAX_BPM, num_tempi=NUM_TEMPI, min_beats_per_bar=MIN_BEAT_PER_BAR,
@@ -213,11 +213,11 @@ class particle_filter_cascade:
                 self.down_max = np.argmax(m)  # calculating downbeat particles clutter
 
                 # beat vs downbeat distinguishment
-                if self.down_max in self.st2.first_states[0] and self.path[-1][1] !=1 and both_activations[i][1]>0.4:
+                if self.down_max in self.st2.first_states[0] and self.path[-1][1] !=1 and both_activations[i][1]>0.2:
                     self.path = np.append(self.path, [[self.offset + self.counter * self.T, 1]], axis=0)
                     if self.mode == 'stream' or self.mode == 'realtime':
                         print("*beat!")
-                elif (activations[i]>0.4) :
+                elif (activations[i]>0.2) :
                     self.path = np.append(self.path, [[self.offset + self.counter * self.T, 2]], axis=0)
                     if self.mode == 'stream' or self.mode == 'realtime':
                         print("beat!")
