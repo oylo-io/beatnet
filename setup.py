@@ -19,17 +19,9 @@ import distutils.cmd
 # Required packages
 REQUIRED_PACKAGES = [
     'numpy',
-    'cython',
     'librosa>=0.8.0',
-    'numba==0.54.1', # Manually specified here as librosa incorrectly states that it is compatible with the latest version of numba although 0.50.0 is not compatible. 
     'scipy',
-    'mido>=1.2.6',
-    'pytest',
-    #'pyaudio',
-    ##'pyfftw',
-    'madmom',
     'torch',
-    'Matplotlib',
 ]
 
 
@@ -62,7 +54,7 @@ setuptools.setup(
 
     # Package details
     name="BeatNet",
-    version="1.1.3",
+    version="2.0.0",
     package_dir={"": "src"},
     packages=find_packages(where="src"),
     # packages=find_packages(),
@@ -74,7 +66,7 @@ setuptools.setup(
     author_email="mheydari@ur.rochester.edu",
     description="A package for Real-time and offline music beat, downbeat tempo and meter tracking using BeatNet AI",
     keywords="Beat tracking, Downbeat tracking, meter detection, tempo tracking, particle filtering, real-time beat, real-time tempo",
-    url="https://github.com/mjhydri/BeatNet"
+    url="https://github.com/oylo-io/beatnet"
 
 
     # CLI - not developed yet
